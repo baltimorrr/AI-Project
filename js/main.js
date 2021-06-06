@@ -2,6 +2,10 @@
 let background, canvas, c
 let w, h, w2, h2, elements
 let boat, cannibal1, monster1, moves, textures, solution
+let NodeStateId = new Map()
+let NodeStateArr = []
+let path = []
+let checkPassengerState = [true, true, true, true, true, true]
 
 
 
@@ -10,7 +14,7 @@ let boat, cannibal1, monster1, moves, textures, solution
 function init() {
     let old = document.querySelector('canvas')
     if(old) old.remove()
-
+   
     solution = path
     // solution = [4, 5, 0, 4, 5, 4, 0, 4, 4, 
     //     4, 6, 0, 4, 6, 4, 0, 4, 4, 
@@ -81,6 +85,7 @@ function init() {
         },
 
         action: function() {
+            convertMatrixIdToPath()
             init()
             //canvas.removeEventListener('click', getElement)
             solveMe()
@@ -122,6 +127,7 @@ function gameOver(result){
 	//canvas.removeEventListener('click', getElement);
 	setTimeout( function(){
 		canvas.addEventListener('click', function(){
+            convertMatrixIdToPath()
 			init();
 		});
 	}, 100);
@@ -164,12 +170,13 @@ function loadImages() {
     }
 }
 
-let NodeStateId = new Map()
-let NodeStateArr = []
-let path = []
-let checkPassengerState = [true, true, true, true, true, true]
+
 
 function convertMatrixIdToPath() {
+    path = []
+    checkPassengerState = [true, true, true, true, true, true]
+    NodeStateArr = []
+    NodeStateId.clear
     let matrixId = [
         [0, 5],
         [5, 2],
