@@ -1,10 +1,10 @@
 
 let background, canvas, c
 let w, h, w2, h2, elements
-let boat, cannibal1, monster1, moves, textures, solution
+let boat, misionary1, cannibal1, moves, textures, solution
 let NodeStateId = new Map()
 let NodeStateArr = []
-let path = []
+let path = [] 
 let checkPassengerState = [true, true, true, true, true, true]
 
 
@@ -50,32 +50,32 @@ function init() {
 
     elements = []
 
-    cannibal1 = new Passenger(textures['img/farmer.png'], w2, h2, 'cannibal', -1, true)
-    cannibal2 = new Passenger(textures['img/farmer.png'], w2, h2, 'cannibal', 0, true)
-    cannibal3 = new Passenger(textures['img/farmer.png'], w2, h2, 'cannibal', 1, true)
-    monster1 = new Passenger(textures['img/wolf.png'], w2, h2, 'monster', 2)
-    monster2 = new Passenger(textures['img/wolf.png'], w2, h2, 'monster', 3)
-    monster3 = new Passenger(textures['img/wolf.png'], w2, h2, 'monster', 4)
+    misionary1 = new Passenger(textures['img/misionary.png'], w2, h2, 'misionary', -1)
+    misionary2 = new Passenger(textures['img/misionary.png'], w2, h2, 'misionary', 0)
+    misionary3 = new Passenger(textures['img/misionary.png'], w2, h2, 'misionary', 1)
+    cannibal1 = new Passenger(textures['img/cannibal.png'], w2, h2, 'cannibal', 2)
+    cannibal2 = new Passenger(textures['img/cannibal.png'], w2, h2, 'cannibal', 3)
+    cannibal3 = new Passenger(textures['img/cannibal.png'], w2, h2, 'cannibal', 4)
     boat = new Boat(textures['img/boat.png'])
 
     elements.push(boat)
+    elements.push(misionary1)
+    elements.push(misionary2)
+    elements.push(misionary3)
     elements.push(cannibal1)
     elements.push(cannibal2)
     elements.push(cannibal3)
-    elements.push(monster1)
-    elements.push(monster2)
-    elements.push(monster3)
 
     let solve = {
         pos: {
             x: w-150,
-            y: h-50
+            y: h-70
         },
         h: 30,
         w: 100,
 
         show: function() {
-            c.fillStyle = 'gray'
+            c.fillStyle = 'white'
             c.fillRect(this.pos.x, this.pos.y, this.w, this.h)
             c.fillStyle = 'black'
             c.font = '1.2rem Arial'
@@ -91,9 +91,39 @@ function init() {
             solveMe()
         }
     }
-
     elements.push(solve)
+
+    let stop = {
+        pos: {
+            x: w-150,
+            y: h-120
+        },
+        h: 30,
+        w: 100,
+
+        show: function() {
+            c.fillStyle = 'white'
+            c.fillRect(this.pos.x, this.pos.y, this.w, this.h)
+            c.fillStyle = 'black'
+            c.font = '1.2rem Arial'
+            let text = 'Stop'
+            let m = c.measureText(text)
+            c.fillText(text, this.pos.x + m.width, this.pos.y + 20)
+        },
+
+        
+        action: function() {
+            stopMe()
+        }
+    }
+
+    elements.push(stop)
     draw()
+}
+
+function stopMe() {
+    window.alert('Stop')
+    
 }
 
 function solveMe() {
@@ -111,14 +141,14 @@ function draw() {
     for(let i = 0; i < elements.length; i++) {
         elements[i].show()
     }
-    console.log(cannibal1.side + "side")
+    
     check()
 }
 
 function check() {
     
-	if( cannibal1.side == 3 && cannibal2.side == 3 && cannibal3.side == 3 
-        && monster1.side == 3 && monster2.side == 3 && monster3.side == 3){
+	if( misionary1.side == 3 && misionary2.side == 3 && misionary3.side == 3 
+        && cannibal1.side == 3 && cannibal2.side == 3 && cannibal3.side == 3){
 		gameOver('You Win');
 	}
 }
@@ -157,8 +187,8 @@ function loadImages() {
     // let imgSrc = ['img/farmer.png', 'img/farmer.png', 'img/farmer.png', 
     // 'img/wofl.png', 'img/wofl.png', 'img/wofl.png', 'img/boat.png']
 
-    let imgSrc = ['img/farmer.png', 'img/farmer.png', 'img/farmer.png',
-     'img/wolf.png', 'img/wolf.png', 'img/wolf.png', 'img/boat.png']
+    let imgSrc = ['img/misionary.png', 'img/misionary.png', 'img/misionary.png',
+     'img/cannibal.png', 'img/cannibal.png', 'img/cannibal.png', 'img/boat.png']
     textures = {}
     for(name of imgSrc) {
         textures[name] = new Image()
