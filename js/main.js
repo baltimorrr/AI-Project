@@ -308,7 +308,7 @@ function convertMatrixIdToPath() {
             // move boat
             path.push(0)
             for(let i = 0; i < tempPath.length; i++) path.push(tempPath[i])
-            for(let i = 0; i < tempPath.length; i++) path.push(tempPath[i])
+            //for(let i = 0; i < tempPath.length; i++) path.push(tempPath[i])
         }
         
         

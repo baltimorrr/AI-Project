@@ -29,7 +29,6 @@ class Passenger {
                 boat.addPassenger(this)
             }
             else if(this.side == 1) {
-                this.side = 0
                 boat.removePassenger(this)
             }
             console.log(this.side)
@@ -39,6 +38,5 @@ class Passenger {
             if(this.side == 2) boat.removePassenger(this)
             else boat.addPassenger(this)
         }
-        //console.log(matrix)
     }
 }

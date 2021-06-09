@@ -22,17 +22,13 @@ class Boat {
         if(this.passengers.length < 2) {
             p.side += this.side == 0 ? 1 : -1
             this.passengers.push(p)
-            return true
         }
-        return false
     }
 
     removePassenger(p) {
         let index = this.passengers.indexOf(p)
         if(index >= 0) {
-            
-            p.side += this.side == 0 ? 1 : 1
-            
+            p.side += this.side == 0 ? -1 : 1
             this.passengers.splice(index, 1)
         }
     }    
