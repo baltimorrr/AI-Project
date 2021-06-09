@@ -85,8 +85,9 @@ function init() {
         },
 
         action: function() {
-            convertMatrixIdToPath()
             init()
+            convertMatrixIdToPath()
+            
             //canvas.removeEventListener('click', getElement)
             solveMe()
         }
@@ -277,7 +278,6 @@ function convertMatrixIdToPath() {
             // move boat
             path.push(0)
             for(let i = 0; i < tempPath.length; i++) path.push(tempPath[i])
-            if(childPath === -1) for(let i = 0; i < tempPath.length; i++) path.push(tempPath[i])
         }
         else {
             let numFarmer = childPath[0]
@@ -324,7 +324,6 @@ convertMatrixIdToPath()
 //init()
 
 window.onresize = function() {
-    
-    init()
-    
+    loadImages()
+    convertMatrixIdToPath()
 }
